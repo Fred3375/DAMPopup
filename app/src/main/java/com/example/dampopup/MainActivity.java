@@ -7,22 +7,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements NoticeDialogFragment.NoticeDialogListener {
+public class MainActivity extends AppCompatActivity implements DlgFragment.NoticeDialogListener {
     private Button btnFragment;
-    private NoticeDialogFragment noticeDialogFragment;
+    private DlgFragment dlgFragment;
 
 
     // The dialog fragment receives a reference to this Activity through the
     // Fragment.onAttach() callback, which it uses to call the following methods
     // defined by the NoticeDialogFragment.NoticeDialogListener interface
     @Override
-    public void onDialogBtn1Click(NoticeDialogFragment dialog) {
+    public void onDialogBtn1Click(DlgFragment dialog) {
         // User touched the dialog's positive button
         Toast.makeText(this, "BOUTON 1 ", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onDialogBtn2Click(NoticeDialogFragment dialog) {
+    public void onDialogBtn2Click(DlgFragment dialog) {
         // User touched the dialog's negative button
         Toast.makeText(this, "BOUTON 2 ", Toast.LENGTH_SHORT).show();
     }
@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity implements NoticeDialogFragm
         btnFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                noticeDialogFragment =new NoticeDialogFragment();
-                noticeDialogFragment.show(getSupportFragmentManager(),"My  Fragment");
+                dlgFragment =new DlgFragment();
+                dlgFragment.show(getSupportFragmentManager(),"My  Fragment");
             }
         });
     }

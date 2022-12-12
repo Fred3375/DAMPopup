@@ -10,7 +10,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class NoticeDialogFragment extends androidx.fragment.app.DialogFragment {
+public class DlgFragment extends androidx.fragment.app.DialogFragment {
 
     private Button btn1, btn2;
 
@@ -18,21 +18,22 @@ public class NoticeDialogFragment extends androidx.fragment.app.DialogFragment {
      * implement this interface in order to receive event callbacks.
      * Each method passes the DialogFragment in case the host needs to query it. */
     public interface NoticeDialogListener {
-        public void onDialogBtn1Click(NoticeDialogFragment dialog);
-        public void onDialogBtn2Click(NoticeDialogFragment dialog);
+        public void onDialogBtn1Click(DlgFragment dialog);
+        public void onDialogBtn2Click(DlgFragment dialog);
     }
 
     // Use this instance of the interface to deliver action events
+    // pour nous c'est mainActivity
     NoticeDialogListener listener;
 
     // Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onAttach(Context parentContext) {
+        super.onAttach(parentContext);
         // Verify that the host activity implements the callback interface
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host
-            listener = (NoticeDialogListener) context;
+            listener = (NoticeDialogListener) parentContext;
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException("Caller must implement NoticeDialogListener");
@@ -50,7 +51,7 @@ public class NoticeDialogFragment extends androidx.fragment.app.DialogFragment {
             public void onClick(View v) {
                 // Toast.makeText(getActivity().getApplicationContext(), "Bye", Toast.LENGTH_SHORT).show();
                 dismiss();
-                listener.onDialogBtn1Click(NoticeDialogFragment.this);
+                listener.onDialogBtn1Click(DlgFragment.this);
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +59,7 @@ public class NoticeDialogFragment extends androidx.fragment.app.DialogFragment {
             public void onClick(View v) {
                 // Toast.makeText(getActivity().getApplicationContext(), "Bye", Toast.LENGTH_SHORT).show();
                 dismiss();
-                listener.onDialogBtn2Click(NoticeDialogFragment.this);
+                listener.onDialogBtn2Click(DlgFragment.this);
             }
         });
     }
